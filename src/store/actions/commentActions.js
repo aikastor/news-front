@@ -8,10 +8,35 @@ export const fetchCommentsSuccess = (comments) => ({type: FETCH_COMMENTS_SUCCESS
 export const addCommentSuccess = () => ({type: ADD_COMMENT_SUCCESS});
 export const deleteCommentSuccess =() => ({type: DELETE_COMMENT_SUCCESS});
 
-export const fetchComments = () => {
+export const fetchComments = (newsID) => {
   return async (dispatch) => {
     try {
-
+      const response = await axiosApi.get(`http://localhost:8000/commentaries/?news_id=${newsID}`);
+      dispatch(fetchCommentsSuccess(response.data));
+    } catch (e) {
+      console.error(e)
     }
+  }
+};
+export const addComment = (comment) => {
+  return async (dispatch) => {
+    try {
+      await  axiosApi.post('http://localhost:8000/commentaries', comment);
+      dispatch(addCommentSuccess())
+    } catch (e) {
+      console.error(e)
+    }
+
+  }
+};
+export const deleteComment = (commentID) => {
+  return async (dispatch) => {
+    try {
+      await  axiosApi.delete(`http://localhost:8000/commentaries/${commentID}`);
+      dispatch(deleteCommentSuccess())
+    } catch (e) {
+      console.error(e)
+    }
+
   }
 };
