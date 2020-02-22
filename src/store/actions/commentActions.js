@@ -11,7 +11,7 @@ export const deleteCommentSuccess =() => ({type: DELETE_COMMENT_SUCCESS});
 export const fetchComments = (newsID) => {
   return async (dispatch) => {
     try {
-      const response = await axiosApi.get(`http://localhost:8000/commentaries/?news_id=${newsID}`);
+      const response = await axiosApi.get(`http://localhost:8000/commentaries?news_id=${newsID}`);
       dispatch(fetchCommentsSuccess(response.data));
     } catch (e) {
       console.error(e)
@@ -32,6 +32,7 @@ export const addComment = (comment) => {
 export const deleteComment = (commentID) => {
   return async (dispatch) => {
     try {
+      console.log(commentID);
       await  axiosApi.delete(`http://localhost:8000/commentaries/${commentID}`);
       dispatch(deleteCommentSuccess())
     } catch (e) {

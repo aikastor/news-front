@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {combineReducers} from "redux";
+
 import {addComment, deleteComment, fetchComments} from "../../store/actions/commentActions";
 import {fetchSinglePost} from "../../store/actions/postActions";
 import {connect} from "react-redux";
@@ -40,7 +40,7 @@ class SinglePost extends Component {
   };
   async deleteComment (commentID) {
     await this.props.deleteComment(commentID);
-    this.props.fetchComments();
+    this.props.fetchComments(this.props.match.params.id);
   }
   render() {
     return (
