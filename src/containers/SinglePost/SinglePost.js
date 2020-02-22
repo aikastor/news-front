@@ -66,7 +66,7 @@ class SinglePost extends Component {
           }
           {/*COMMENTS*/}
           <h4>Comments: </h4>
-          {this.props.comements ?
+          {
             this.props.comments.map(comment => (
                 <Card key={comment.id} style={{padding: '7px', marginTop: '5px'}}>
                   <Media>
@@ -85,8 +85,7 @@ class SinglePost extends Component {
                 </Card>
 
             ))
-              :
-              <span style={{color: 'grey'}} >No comments yet..</span>
+
           }
           <Form onSubmit={this.submitHandler}
                 style={{marginTop: '15px'}}
