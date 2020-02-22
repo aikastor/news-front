@@ -25,7 +25,7 @@ export const fetchPosts = () => {
 export const createPost = (post)=> {
   return async (dispatch) => {
     try {
-      await  axiosApi.post('http://localhost:8000/posts', post);
+      await  axiosApi.post('http://localhost:8000/news', post);
       dispatch(createPostSuccess())
     } catch (e) {
       console.error(e)
@@ -36,11 +36,12 @@ export const createPost = (post)=> {
 export const fetchSinglePost = (id) => {
   return async (dispatch) => {
     try {
-      const response = await axiosApi.get(`http://localhost:8000/recipes/${id}`);
+      const response = await axiosApi.get(`http://localhost:8000/news/${id}`);
       dispatch(fetchSinglePostSuccess(response.data))
     } catch (e) {
       console.log(e)
     }
+
   }
 };
 export const deletePost = (postID) => {
@@ -51,6 +52,5 @@ export const deletePost = (postID) => {
     } catch (e) {
       console.error(e)
     }
-
   }
 };
