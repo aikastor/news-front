@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import {addComment, deleteComment, fetchComments} from "../../store/actions/commentActions";
 import {fetchSinglePost} from "../../store/actions/postActions";
 import {connect} from "react-redux";
-import {Button, Card, Col, Form, FormGroup, Input, Label, Media} from "reactstrap";
+import {Button, Card, Col, Form, FormGroup, Input, Label, Media, Row} from "reactstrap";
 
 class SinglePost extends Component {
   state = {
@@ -51,30 +51,46 @@ class SinglePost extends Component {
               <>
                 <h1>{this.props.singlePost.title}</h1>
                 <span> Posted at :{this.props.singlePost.date}</span>
-                <p>{this.props.singlePost.text}</p>
+                <br/>
+                {this.props.singlePost.image &&
+                  <img src={'http://localhost:8000/uploads/' + this.props.singlePost.image}
+                       style={{maxHeight: '500px', maxWidth: '1000px'}}
+                       alt={this.props.singlePost.title}/>
+                }
+                <br/>
+                <div style={{paddingTop: '10px', paddingBottom: '10px'}}>
+                  <p>{this.props.singlePost.text}</p>
+                </div>
               </>
           )
           }
           {/*COMMENTS*/}
-          {
+          <h4>Comments: </h4>
+          {this.props.comements ?
             this.props.comments.map(comment => (
-                <Card>
+                <Card key={comment.id} style={{padding: '7px', marginTop: '5px'}}>
                   <Media>
                     <Media body>
                       <Media heading>
-                        {comment.author ? comment.author : 'Anonymous'}
+                        <h6>{comment.author ? comment.author : 'Anonymous'}</h6>
                       </Media>
-                      {comment.comment}
-                      <Button type="submit" color='primary'
-                              onClick={()=>this.deleteComment(comment.id)}
-                      >Delete</Button>
+                      <Row>
+                        <Col xs='10'>{comment.comment}</Col>
+                        <Col xs='2'><Button type="submit" color='primary'
+                                            onClick={()=>this.deleteComment(comment.id)}
+                        >Delete</Button></Col>
+                      </Row>
                     </Media>
                   </Media>
                 </Card>
 
             ))
+              :
+              <span style={{color: 'grey'}} >No comments yet..</span>
           }
-          <Form onSubmit={this.submitHandler}>
+          <Form onSubmit={this.submitHandler}
+                style={{marginTop: '15px'}}
+                >
             <FormGroup row>
               <Label for="author" sm={2}>Author</Label>
               <Col sm={10}>

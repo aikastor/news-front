@@ -8,7 +8,6 @@ class PostForm extends Component {
     title: '',
     image: null,
     text: '',
-    author: '',
   };
   inputChangeHandler = (e) => {
     this.setState({
@@ -42,17 +41,6 @@ class PostForm extends Component {
     return (
         <div>
           <Form onSubmit={this.submitHandler}>
-            <FormGroup row>
-              <Label for="author" sm={2}>Author</Label>
-              <Col sm={10}>
-                <Input
-                       type="text" name="author"
-                       id="author" placeholder="Enter author"
-                       value={this.state.author}
-                       onChange={this.inputChangeHandler}
-                />
-              </Col>
-            </FormGroup>
             <FormGroup row>
               <Label for="title" sm={2}>Title</Label>
               <Col sm={10}>
