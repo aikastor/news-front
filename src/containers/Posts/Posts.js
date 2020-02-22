@@ -9,7 +9,8 @@ class Posts extends Component {
     this.props.fetchPosts();
   }
   async deletePost (postID) {
-
+    await this.props.deletePost(postID);
+    this.props.fetchPosts();
   }
   render() {
     return this.props.posts.map(post => (
@@ -17,7 +18,7 @@ class Posts extends Component {
           {post.title}
           {post.date}
         <Link to={`news/${post.id}`}>Read full post >> </Link>
-          <Button onClick={this.deletePost(post.id)}>DELETE</Button>
+          <Button onClick={() =>this.deletePost(post.id)}>DELETE</Button>
         </Card>
         )
     );
@@ -28,7 +29,7 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = dispatch => ({
   fetchPosts : ()=> dispatch(fetchPosts()),
-  deletePost: (postID)=> dispatch(deletePost())
+  deletePost: (postID)=> dispatch(deletePost(postID))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Posts);

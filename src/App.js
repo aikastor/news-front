@@ -3,6 +3,7 @@ import {Container, Nav, Navbar, NavbarBrand, NavItem, NavLink} from "reactstrap"
 import Posts from "./containers/Posts/Posts";
 import {NavLink as RouterNavLink, Route, Switch} from 'react-router-dom';
 import NewPost from "./containers/NewPost/NewPost";
+import SinglePost from "./containers/SinglePost/SinglePost";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Switch>
           <Route path='/posts/new' exact component={NewPost}/>
           <Route path='/' exact component={Posts}/>
+          <Route path='/news/:id' exact component={SinglePost}/>
         </Switch>
       </Container>
     </>

@@ -34,7 +34,10 @@ class PostForm extends Component {
     });
     this.props.onSubmit(formData)
   };
-
+  async deletePost (postID) {
+    await this.props.deletePost(postID);
+    this.props.fetchPosts();
+  }
   render() {
     return (
         <div>
