@@ -1,26 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {Container, Nav, Navbar, NavbarBrand, NavItem, NavLink} from "reactstrap";
+import Posts from "./containers/Posts/Posts";
+import {NavLink as RouterNavLink, Route, Switch} from 'react-router-dom';
+import NewPost from "./containers/NewPost/NewPost";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Navbar color="dark" dark expand="md">
+        <NavbarBrand tag={RouterNavLink} to='/'>Posts</NavbarBrand>
+        <Nav className="mr-auto" navbar>
+          <NavItem>
+            <NavLink tag={RouterNavLink} to="/posts/new">Add new post</NavLink>
+          </NavItem>
+        </Nav>
+      </Navbar>
+      <Container>
+        <Switch>
+          <Route path='/posts/new' exact component={NewPost}/>
+          <Route path='/' exact component={Posts}/>
+        </Switch>
+      </Container>
+    </>
   );
-}
+};
 
 export default App;
