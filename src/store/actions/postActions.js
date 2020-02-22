@@ -1,14 +1,15 @@
 import axiosApi from "../../axiosApi";
+import {deleteCommentSuccess} from "./commentActions";
 
 export const FETCH_POSTS_SUCCESS = 'FETCH_POSTS_SUCCESS';
 export const CREATE_POST_SUCCESS = 'CREATE_POST_SUCCESS';
 export const FETCH_SINGLE_POST_SUCCESS = 'FETCH_SINGLE_POST_SUCCESS';
 
-export const ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS';
-export const DELETE_COMMENT_SUCCESS = 'DELETE_COMMENT_SUCCESS';
+export const DELETE_POST_SUCCESS = 'DELETE_POST_SUCCESS';
 
 export const fetchPostsSuccess = (posts) => ({type: FETCH_POSTS_SUCCESS, posts});
 export const createPostSuccess = () => ({type: CREATE_POST_SUCCESS});
+export const deletePostSuccess = () => ({type: DELETE_POST_SUCCESS});
 export const fetchSinglePostSuccess= (post) => ({type: FETCH_SINGLE_POST_SUCCESS, post});
 
 export const fetchPosts = () => {
@@ -40,5 +41,16 @@ export const fetchSinglePost = (id) => {
     } catch (e) {
       console.log(e)
     }
+  }
+};
+export const deletePost = (postID) => {
+  return async (dispatch) => {
+    try {
+      await  axiosApi.delete(`http://localhost:8000/news/${postID}`);
+      dispatch(deletePostSuccess())
+    } catch (e) {
+      console.error(e)
+    }
+
   }
 };
